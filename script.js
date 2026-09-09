@@ -1,17 +1,9 @@
-/* =========================================================
-   MY VIRTUAL LEDGER — To-Do List App
-   Single source of truth: the `tasks` array below.
-   Every user action mutates `tasks`, then calls saveTasks()
-   and renderTasks() so storage and the DOM always match
-   state.
-   ========================================================= */
-
 const STORAGE_KEY = "ledger.tasks.v1";
 
 /** @type {{id: string, text: string, done: boolean, createdAt: number}[]} */
 let tasks = [];
 
-// ---------- DOM references ----------
+// DOM references 
 const taskForm = document.getElementById("taskForm");
 const taskInput = document.getElementById("taskInput");
 const formError = document.getElementById("formError");
@@ -21,8 +13,9 @@ const deleteAllBtn = document.getElementById("deleteAllBtn");
 const openCountEl = document.getElementById("openCount");
 const doneCountEl = document.getElementById("doneCount");
 const todayDateEl = document.getElementById("todayDate");
+const charLimit = document.getElementById("charLimit");
 
-// ---------- Persistence ----------
+// Persistence 
 function loadTasks() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -45,7 +38,7 @@ function saveTasks() {
   }
 }
 
-// ---------- Rendering ----------
+// Rendering 
 function renderTasks() {
   taskList.innerHTML = "";
 
@@ -54,7 +47,7 @@ function renderTasks() {
     li.className = "task-row" + (task.done ? " is-done" : "");
     li.dataset.id = task.id;
 
-    // ---------- Check button ----------
+    //  Check button 
     const checkBtn = document.createElement("button");
     checkBtn.type = "button";
     checkBtn.className = "task-row__check";
@@ -73,12 +66,12 @@ function renderTasks() {
 
     checkBtn.addEventListener("click", () => toggleDone(task.id));
 
-    // ---------- Task text ----------
+    //  Task text 
     const span = document.createElement("span");
     span.className = "task-row__text";
     span.textContent = task.text;
 
-    // ---------- Edit button ----------
+    //  Edit button 
     const editBtn = document.createElement("button");
     editBtn.type = "button";
     editBtn.className = "task-row__edit";
@@ -87,7 +80,7 @@ function renderTasks() {
 
     editBtn.addEventListener("click", () => editTask(task.id));
 
-    // ---------- Delete button ----------
+    //  Delete button 
     const delBtn = document.createElement("button");
     delBtn.type = "button";
     delBtn.className = "task-row__delete";
@@ -112,7 +105,7 @@ function updateCounts() {
   doneCountEl.textContent = done;
 }
 
-// ---------- Update Task ----------
+//  Update Task 
 function editTask(id) {
   const task = tasks.find((task) => task.id === id);
 
@@ -125,7 +118,7 @@ function editTask(id) {
   const textSpan = li.querySelector(".task-row__text");
   const editBtn = li.querySelector(".task-row__edit");
 
-  // Create input field
+  // Input field
   const editInput = document.createElement("input");
 
   editInput.type = "text";
@@ -179,7 +172,7 @@ function updateTask(id, newText) {
   renderTasks();
 }
 
-// ---------- Task operations ----------
+// Task operations 
 function addTask(text) {
   const task = {
     id: crypto.randomUUID
@@ -214,7 +207,7 @@ function deleteTask(id) {
   renderTasks();
 }
 
-/** Asynchronously clears every task, simulating a ~2s loading state. */
+// 2 seconds loading state for task clearing
 function deleteAllTasks() {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -228,7 +221,7 @@ function deleteAllTasks() {
   });
 }
 
-// ---------- Form handling & validation ----------
+// Form handling & validation 
 function showError(message) {
   formError.textContent = message;
   taskForm.classList.add("entry-row--invalid");
@@ -264,7 +257,13 @@ taskInput.addEventListener("input", () => {
   }
 });
 
-// ---------- Delete All ----------
+// 120 maximum characters reached
+
+taskInput.addEventListener("input", () => {
+  charLimit.classList.toggle("is-visible", taskInput.value.length >= 120);
+});
+
+//  Delete All 
 
 deleteAllBtn.addEventListener("click", async () => {
 
@@ -287,7 +286,7 @@ deleteAllBtn.addEventListener("click", async () => {
 
 });
 
-// ---------- Init ----------
+// Init
 function setToday() {
   const today = new Date();
 

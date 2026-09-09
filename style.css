@@ -10,8 +10,8 @@
   --gold-soft: rgba(184, 134, 46, 0.14);
   --white: #FFFDF8;
 
-  --font-display: "Source Serif 4", Georgia, serif;
-  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-body: "Segoe UI", Arial, Helvetica, sans-serif;
 
   --row-height: 44px;
 }
@@ -57,7 +57,7 @@ body {
   box-shadow: 0 1px 0 var(--paper-line), 0 24px 48px -32px rgba(32, 41, 31, 0.35);
 }
 
-/* the red vertical margin rule, like a physical ledger book */
+/* Red vertical line */
 .ledger::before {
   content: "";
   position: absolute;
@@ -111,7 +111,7 @@ body {
   font-weight: 600;
 }
 
-/* entry row (form) */
+/* entry row */
 .entry-row {
   display: flex;
   align-items: center;
@@ -207,7 +207,7 @@ body {
   width: 22px;
   height: 22px;
   border: 1.5px solid var(--ink-soft);
-  border-radius: 50%;
+  border-radius: 3px;
   background: transparent;
   cursor: pointer;
   display: flex;
@@ -359,6 +359,19 @@ body {
 }
 .dots span:nth-child(2) { animation-delay: 0.2s; }
 .dots span:nth-child(3) { animation-delay: 0.4s; }
+
+/* Character Limit */
+
+.char-limit {
+  display: none;
+  font-size: 0.8rem;
+  color: var(--margin-red);
+  margin-top: 4px;
+}
+
+.char-limit.is-visible {
+  display: block;
+}
 
 @keyframes blink {
   0%, 20% { opacity: 0; }

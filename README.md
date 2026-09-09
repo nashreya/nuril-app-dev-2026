@@ -1,31 +1,54 @@
-# The Ledger — To‑Do List App
+# My Virtual Ledger — To-Do List Application
 
-A vanilla HTML/CSS/JavaScript to‑do list, styled like a ledger/journal page.
-No frameworks or build step required.
+My Virtual Ledger is a simple To-Do List web application built using HTML, CSS, and JavaScript. It allows users to create, view, update, complete, and delete tasks while saving task data in the browser using Local Storage.
 
-## Files
-- `index.html` — structure/markup
-- `style.css` — ledger-inspired visual design
-- `script.js` — all app logic (state, events, validation, Local Storage)
+The interface is designed with a simple ledger and journal-inspired layout.
 
-## Run it
-Just open `index.html` in a browser, or serve the folder locally, e.g.:
-```
-npx serve .
-```
+## Features
 
-## How it meets the brief
-- **Create**: the form at the top adds a task instantly via JS, no page reload; input clears after a successful add.
-- **Validation**: empty/whitespace-only input is rejected with an inline error message (red underline + text), handled entirely in `script.js`.
-- **Read/View**: all tasks render from a single `tasks` array (the source of truth) into the `<ul>`; the list re-renders on every change.
-- **Update**: clicking the round check button toggles `done` on a task, which flips its visual style (strikethrough) and persists.
-- **Delete**: the × button removes a single task immediately from state, DOM, and storage.
-- **Delete All**: the footer button clears every task, showing a ~2s simulated loading state (via `setTimeout` wrapped in a `Promise`, awaited with `async/await`) before clearing.
-- **Persistence**: all task data is saved to `localStorage` under the key `ledger.tasks.v1` and reloaded on page load, including completed state.
-- **State management**: `tasks` is the single in-memory source of truth. Every operation (add/toggle/delete/clear) mutates `tasks`, then calls `saveTasks()` and `renderTasks()` — the DOM is never edited ad hoc, it's always derived from state.
+### Create Tasks
+- Add a new task through the task form.
+- New tasks appear immediately without refreshing the page.
+- The input field clears after a task is added.
+- Empty tasks are prevented through JavaScript validation.
+- An error message is displayed when the user attempts to submit an empty task.
 
-## Submission checklist (per exam instructions)
-1. Branch your existing GitHub repo: `git checkout -b Prelim-Exam`
-2. Copy these three files into the project.
-3. Commit and push the branch.
-4. Submit the repository link.
+### View Tasks
+- Tasks are dynamically displayed from the `tasks` array.
+- Each task contains its task name, completion control, edit button, and delete button.
+- An empty state is displayed when there are no tasks.
+- Open and completed task counters update automatically.
+
+### Update Tasks
+- Tasks can be marked as done or returned to an open state.
+- Completed tasks are visually distinguished using a strikethrough.
+- Existing task text can be edited using the Edit button.
+- Updated task information is saved to Local Storage.
+
+### Delete Tasks
+- Individual tasks can be deleted immediately.
+- The Delete All button removes all tasks.
+- Delete All uses a simulated 2-second loading state using `setTimeout`, a Promise, and `async/await`.
+
+### Local Storage
+- Tasks are stored in the browser using Local Storage.
+- The storage key used by the application is `ledger.tasks.v1`.
+- Tasks remain available after refreshing or reopening the browser on the same device and browser profile.
+
+### State Management
+- The `tasks` array serves as the application's main source of truth.
+- Task operations update the `tasks` array first.
+- Changes are saved to Local Storage using `saveTasks()`.
+- `renderTasks()` updates the displayed task list and counters based on the current state.
+
+## Task Data Structure
+
+Each task is represented as a JavaScript object:
+
+```javascript
+{
+  id: string,
+  text: string,
+  done: boolean,
+  createdAt: number
+}

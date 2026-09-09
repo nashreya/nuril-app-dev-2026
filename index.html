@@ -3,9 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>My Virtual Ledger - To‑Do List</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>My Virtual Ledger</title>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -16,7 +14,7 @@
       <header class="ledger__header">
         <div class="ledger__margin-mark" aria-hidden="true"></div>
         <div class="ledger__heading">
-          <h1 class="ledger__title">My Virtual Ledger - To-Do List</h1>
+          <h1 class="ledger__title">My Virtual Ledger</h1>
           <p class="ledger__date" id="todayDate"></p>
         </div>
         <div class="ledger__counts" id="counts" aria-live="polite">
@@ -37,14 +35,15 @@
         />
         <button type="submit" class="btn btn--add">Add</button>
       </form>
+      <p class="char-limit" id="charLimit">Maximum of 120 characters reached.</p>
       <p class="entry-row__error" id="formError" role="alert" aria-live="assertive"></p>
-
+      
       <ul class="task-list" id="taskList">
         <!-- Task rows injected by JS -->
       </ul>
 
       <p class="empty-state" id="emptyState">
-        What are you up to today?
+        No entries yet. Add one above.
       </p>
 
       <footer class="ledger__footer">
@@ -56,7 +55,7 @@
 
     </section>
 
-    <p class="page__footnote">Tasks are saved to Local Storage.</p>
+    <p class="page__footnote">All changes saved.</p>
   </main>
 
 <script src="script.js"></script>
