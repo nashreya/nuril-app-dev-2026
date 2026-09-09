@@ -1,30 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>My Virtual Ledger</title>
-<link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>My Virtual Ledger</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
   <main class="page">
+
+    <!-- Decorative cliparts -->
+    <img
+      src="images/1.png"
+      class="clipart clipart--1"
+      alt=""
+      aria-hidden="true"
+    >
+
+    <img
+      src="images/2.png"
+      class="clipart clipart--2"
+      alt=""
+      aria-hidden="true"
+    >
+
+    <img
+      src="images/3.png"
+      class="clipart clipart--3"
+      alt=""
+      aria-hidden="true"
+    >
+
+    <img
+      src="images/4.png"
+      class="clipart clipart--4"
+      alt=""
+      aria-hidden="true"
+    >
+
+
+    <!-- Main Ledger -->
     <section class="ledger" aria-label="To-do ledger">
 
       <header class="ledger__header">
-        <div class="ledger__margin-mark" aria-hidden="true"></div>
+
+        <div
+          class="ledger__margin-mark"
+          aria-hidden="true">
+        </div>
+
         <div class="ledger__heading">
-          <h1 class="ledger__title">My Virtual Ledger</h1>
-          <p class="ledger__date" id="todayDate"></p>
+
+          <h1 class="ledger__title">
+            My Virtual Ledger
+          </h1>
+
+          <p
+            class="ledger__date"
+            id="todayDate">
+          </p>
+
         </div>
-        <div class="ledger__counts" id="counts" aria-live="polite">
-          <span id="openCount">0</span> open · <span id="doneCount">0</span> done
+
+        <div
+          class="ledger__counts"
+          id="counts"
+          aria-live="polite">
+
+          <span id="openCount">0</span> open ·
+          <span id="doneCount">0</span> done
+
         </div>
+
       </header>
 
-      <form class="entry-row" id="taskForm" novalidate>
-        <span class="entry-row__bullet" aria-hidden="true">+</span>
-        <label for="taskInput" class="sr-only">New task</label>
+
+      <!-- Add Task Form -->
+      <form
+        class="entry-row"
+        id="taskForm"
+        novalidate>
+
+        <span
+          class="entry-row__bullet"
+          aria-hidden="true">
+          +
+        </span>
+
+        <label
+          for="taskInput"
+          class="sr-only">
+          New task
+        </label>
+
         <input
           type="text"
           id="taskInput"
@@ -33,31 +111,95 @@
           autocomplete="off"
           maxlength="120"
         />
-        <button type="submit" class="btn btn--add">Add</button>
-      </form>
-      <p class="char-limit" id="charLimit">Maximum of 120 characters reached.</p>
-      <p class="entry-row__error" id="formError" role="alert" aria-live="assertive"></p>
-      
-      <ul class="task-list" id="taskList">
-        <!-- Task rows injected by JS -->
-      </ul>
 
-      <p class="empty-state" id="emptyState">
-        No entries yet. Add one above.
+        <button
+          type="submit"
+          class="btn btn--add">
+          Add
+        </button>
+
+      </form>
+
+
+      <!-- Character Limit Message -->
+      <p
+        class="char-limit"
+        id="charLimit">
+        Maximum of 120 characters reached.
       </p>
 
+
+      <!-- Validation Error -->
+      <p
+        class="entry-row__error"
+        id="formError"
+        role="alert"
+        aria-live="assertive">
+      </p>
+
+
+      <!-- Task List -->
+      <ul
+        class="task-list"
+        id="taskList">
+
+        <!-- Task rows injected by JavaScript -->
+
+      </ul>
+
+
+      <!-- Empty State -->
+      <p
+        class="empty-state"
+        id="emptyState">
+
+        No entries yet.
+
+      </p>
+
+
+      <!-- Footer -->
       <footer class="ledger__footer">
-        <button type="button" class="btn btn--clear" id="deleteAllBtn">
-          <span class="btn__label">Delete all</span>
-          <span class="btn__loading" hidden>Clearing<span class="dots"><span>.</span><span>.</span><span>.</span></span></span>
+
+        <button
+          type="button"
+          class="btn btn--clear"
+          id="deleteAllBtn">
+
+          <span class="btn__label">
+            Delete all
+          </span>
+
+          <span
+            class="btn__loading"
+            hidden>
+
+            Clearing
+
+            <span class="dots">
+              <span>.</span>
+              <span>.</span>
+              <span>.</span>
+            </span>
+
+          </span>
+
         </button>
+
       </footer>
 
     </section>
 
-    <p class="page__footnote">All changes saved.</p>
+
+    <!-- Page Footnote -->
+    <p class="page__footnote">
+      All changes saved.
+    </p>
+
   </main>
 
-<script src="script.js"></script>
+
+  <script src="script.js"></script>
+
 </body>
 </html>

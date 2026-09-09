@@ -238,7 +238,7 @@ taskForm.addEventListener("submit", (event) => {
   const value = taskInput.value.trim();
 
   if (value.length === 0) {
-    showError("A task can't be empty. Write something first.");
+    showError("Must add task.");
     taskInput.focus();
     return;
   }
@@ -248,6 +248,7 @@ taskForm.addEventListener("submit", (event) => {
   addTask(value);
 
   taskForm.reset();
+  charLimit.classList.remove("is-visible");
   taskInput.focus();
 });
 
