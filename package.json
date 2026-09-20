@@ -1,0 +1,12 @@
+{
+  "name": "auth-demo",
+  "version": "1.0.0",
+  "description": "Signup and login demo using Express with POST-only APIs and an in-memory JSON array database",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
