@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About me</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 360px; margin: 3rem auto; padding: 0 1rem; }
+    nav { margin-bottom: 1rem; }
+    nav a { margin-right: 1rem; }
+    dt { font-weight: 600; margin-top: .8rem; }
+    dd { margin: 0; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/about-me.html">About me</a>
+    <a href="/users.html">Users</a>
+  </nav>
+  <h1>About me</h1>
+  <dl>
+    <dt>Username</dt><dd id="username">Loading...</dd>
+    <dt>Email</dt><dd id="email"></dd>
+    <dt>Bio</dt><dd id="bio"></dd>
+  </dl>
+
+  <script>
+    const token = localStorage.getItem("token");
+    if (!token) window.location.href = "/index.html";
+
+    (async () => {
+      const res = await fetch("/api/users/about-me", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) {
+        localStorage.removeItem("token"); // expired or invalid
+        window.location.href = "/index.html";
+        return;
+      }
+      const user = await res.json();
+      // textContent (not innerHTML) so a malicious bio can't inject HTML
+      document.getElementById("username").textContent = user.username;
+      document.getElementById("email").textContent = user.email;
+      document.getElementById("bio").textContent = user.bio || "(no bio yet)";
+    })();
+  </script>
+</body>
+</html>

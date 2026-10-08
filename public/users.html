@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Users</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 520px; margin: 3rem auto; padding: 0 1rem; }
+    nav { margin-bottom: 1rem; }
+    nav a { margin-right: 1rem; }
+    ul { list-style: none; padding: 0; }
+    li { padding: .6rem 0; border-bottom: 1px solid #ddd; }
+    small { color: #555; display: block; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/about-me.html">About me</a>
+    <a href="/users.html">Users</a>
+  </nav>
+  <h1>Registered users</h1>
+  <ul id="list"><li>Loading...</li></ul>
+
+  <script>
+    const token = localStorage.getItem("token");
+    if (!token) window.location.href = "/index.html";
+
+    (async () => {
+      const res = await fetch("/api/users", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) {
+        localStorage.removeItem("token");
+        window.location.href = "/index.html";
+        return;
+      }
+      const users = await res.json();
+      const list = document.getElementById("list");
+      list.innerHTML = "";
+      for (const u of users) {
+        const li = document.createElement("li");
+        const strong = document.createElement("strong");
+        strong.textContent = u.username;
+        const email = document.createElement("small");
+        email.textContent = u.email;
+        const bio = document.createElement("small");
+        bio.textContent = u.bio || "";
+        li.append(strong, email, bio);
+        list.appendChild(li);
+      }
+    })();
+  </script>
+</body>
+</html>
