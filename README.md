@@ -58,9 +58,3 @@ Send `Authorization: Bearer <accessToken>`. Every error is `{ "error": "message"
 - **Passwords**: `crypto.scrypt` with a per-user random salt, compared with `timingSafeEqual`.
 - **Packages from the schema note**: `mysql2` (pool in each `db.js`), `helmet` (security headers), `express-rate-limit` (login/register limited per IP; the Blog Server has a general limit), `cookie-parser`.
 
-## Submitting
-```bash
-git checkout -b final-exam
-git add . && git commit -m "Final exam: MariaDB + React"
-git push -u origin final-exam
-```
